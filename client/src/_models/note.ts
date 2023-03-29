@@ -4,6 +4,7 @@ export interface Note{
     title : string
     content : string
     createAt : Date
+    updateAt : Date
     timerSet : Date
     filePath : string
     isDeleted : boolean

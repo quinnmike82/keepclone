@@ -51,4 +51,10 @@ export class BodyComponent {
       error : error => console.log(error.error)
     })
   }
+
+  changeText : any = {}
+
+  change(){
+    console.log(this.changeText);
+  }
 }

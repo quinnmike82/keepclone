@@ -10,6 +10,7 @@ namespace api.Entities
         [ForeignKey("UserId")]
         public virtual User? User { get; set; }
         public DateTime CreateAt { get; set; } = DateTime.Now;
+        public DateTime UpdateAt { get; set; }
         public DateTime TimerSet { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }
