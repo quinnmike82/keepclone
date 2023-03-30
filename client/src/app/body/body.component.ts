@@ -55,6 +55,6 @@ export class BodyComponent {
   changeText : any = {}
 
   change(){
-    console.log(this.changeText);
+    console.log(this.notes);
   }
 }

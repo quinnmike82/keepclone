@@ -5,16 +5,16 @@
 </div>
 
 <div *ngIf="user">
-    <div *ngFor="let item of notes">
-        <h3>{{item.id}}</h3>
-        <h3>{{item.title}}</h3>
-        <h3>{{item.createAt | date:'short'}}</h3>
-        <h3>{{item.timerSet | date:'short'}}</h3>
-        <h3>{{item.isDeleted}}</h3>
+    <div *ngFor="let item of notes, let i = index">
+        <form #noteForm="ngForm" (change)="change()">
+            <input name="id" [(ngModel)]="notes[i].id" class="form-control" type="text" value="{{item.id}}">
+            <input name="name" class="form-control" type="text" value="{{item.title}}">
+            <input class="form-control" type="datetime-local" value="{{item.timerSet}}">
+            <input class="form-control" type="text" value="{{item.isDeleted}}">
+        </form>     
     </div>
 </div>
-<form *ngIf="user" #loginForm="ngForm" (ngSubmit)="login()" autocomplete="off">
+<form *ngIf="user" #loginForm="ngForm"  autocomplete="off">
     <input name="username" class="input-group-text" [(ngModel)]="changeText.username" (change)="change()" type="text"/>
-    <button class="btn btn-success" type="submit">Login</button>
 
 </form>

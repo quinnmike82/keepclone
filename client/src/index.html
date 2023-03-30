@@ -1,13 +1,55 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <title>Client</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/css/bootstrap.min.css"
+    integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 </head>
+
 <body>
+  <header>
+    <div class="header">
+      <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+      <img src="https://www.gstatic.com/images/branding/product/1x/keep_2020q4_48dp.png" alt="logo" />
+      <h1>Remind</h1>
+    </div>
+  </header>
+  <div class="row ">
+    <div class="col-3 leftbar">
+      <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+        <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab"
+          aria-controls="v-pills-home" aria-selected="true">Note</a>
+        <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab"
+          aria-controls="v-pills-profile" aria-selected="false">Note Shared</a>
+        <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab"
+          aria-controls="v-pills-messages" aria-selected="false">Draft</a>
+        <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab"
+          aria-controls="v-pills-settings" aria-selected="false">Trash</a>
+      </div>
+    </div>
+    <div class="col-9 main">
+      <div>
+        <form>
+
+          <input value="" type="text" placeholder="Make A Note" name="title" onChange={handleChange} />
+
+          <p>
+            <textarea value={note.content} onClick={handleExpanded} name="content" placeholder="Take a note..."
+              onChange={handleChange} rows={isExpanded ? 3 : 1}></textarea>
+          </p>
+          <button type="submit">
+            Add
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
   <app-root></app-root>
 </body>
+
 </html>
