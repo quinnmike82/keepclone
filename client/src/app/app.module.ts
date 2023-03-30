@@ -8,7 +8,8 @@ import { GoogleLoginProvider, GoogleSigninButtonModule, SocialAuthServiceConfig,
 import { BodyComponent } from './body/body.component';
 import { HttpClientModule } from '@angular/common/http'
 import { FormsModule } from '@angular/forms';
-
+import {MatSidenavModule} from '@angular/material/sidenav';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +22,9 @@ import { FormsModule } from '@angular/forms';
     SocialLoginModule,
     GoogleSigninButtonModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    MatSidenavModule,
+    BrowserAnimationsModule
   ],
   providers: [{
     provide: 'SocialAuthServiceConfig',
