@@ -1,20 +1,86 @@
-<asl-google-signin-button *ngIf="!user" size="medium"></asl-google-signin-button>
-<div *ngIf="user">
-    <h2>{{user.id}}</h2>
-    <h2>{{user.email}}</h2>
+<div class="text-center google center m-0 m-auto">
+  <asl-google-signin-button  *ngIf="!user"  size="large"></asl-google-signin-button>
 </div>
 
 <div *ngIf="user">
-    <div *ngFor="let item of notes, let i = index">
-        <form #noteForm="ngForm" (change)="change()">
-            <input name="id" [(ngModel)]="notes[i].id" class="form-control" type="text" value="{{item.id}}">
-            <input name="name" class="form-control" type="text" value="{{item.title}}">
-            <input class="form-control" type="datetime-local" value="{{item.timerSet}}">
-            <input class="form-control" type="text" value="{{item.isDeleted}}">
-        </form>     
-    </div>
-</div>
-<form *ngIf="user" #loginForm="ngForm"  autocomplete="off">
-    <input name="username" class="input-group-text" [(ngModel)]="changeText.username" (change)="change()" type="text"/>
+    <div class="col-12 main">
+        <div>
+          <form #noteForm="ngForm"  (submit)="addNote()" enctype="multipart/form-data">
+            <input (change)="changeInputNote($event)" value="" [(ngModel)]="note.title" type="text" placeholder="Make A Note" name="title" />
+            <p>
+              <textarea  name="content" placeholder="Take a note..."
+                ></textarea>
+            </p>
+            
+            <input *ngIf="inputNote" name="content" [(ngModel)]="note.content" class="form-control" type="text" >
+            <input *ngIf="inputNote" name="colorBG" [(ngModel)]="note.colorBG" class="form-control" type="text" >
+            <input *ngIf="inputNote" name="timerSet" [(ngModel)]="note.timerSet" class="form-control" type="datetime-local" >
+            <input *ngIf="inputNote" name="filePath" class="form-control" type="file" (change)="onFileSelected($event)">
+            <button type="submit">
+              Add
+            </button>
 
-</form>
+          </form>
+        </div>
+      </div>
+      <div class="col-12" >
+        
+          <div  (click)="open(content,i)" *ngFor="let item of notes,let i = index" class="card col-3 text-center d-inline-block m-auto" style="background-color: {{item.colorBG}}">
+            <h2>{{item.title}}</h2>
+            <p>{{item.content}}</p>
+            <p>{{item.timerSet | date:'short'}}</p>
+          </div>
+          <ng-template #content let-modal>
+            <div class="modal-header">
+              <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+              <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+            </div>
+            <div class="modal-body" (change)="updateNote()">
+              <form class="w-100">
+                <label for="title">Title</label>
+                  <div class="input-group">
+                    <input
+                    [(ngModel)]="currentNote.title"
+                      id="title"
+                      class="form-control"
+                      name="title"
+                      type="text"
+                    />
+                  </div>
+                  <div class="input-group">
+                    <input
+                    [(ngModel)]="currentNote.content"
+                      id="content"
+                      class="form-control"
+                      name="content"
+                      type="text"
+                    />
+                    </div>
+                  <div class="input-group">
+                    <input
+                    [(ngModel)]="currentNote.colorBG"
+                      id="colorBG"
+                      class="form-control"
+                      name="colorBG"
+                      type="text"
+                    />
+                    </div>
+                  <label for="dateOfBirth">Date of birth</label>
+                  <div class="input-group">
+                    <input
+                    [(ngModel)]="currentNote.timerSet"
+                      id="dateOfBirth"
+                      class="form-control"
+                      placeholder="yyyy-mm-dd"
+                      name="timerSet"
+                      type="datetime-local"
+                    />
+                  </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+            </div>
+          </ng-template>
+      </div>
+</div>
