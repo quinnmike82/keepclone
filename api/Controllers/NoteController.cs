@@ -66,6 +66,13 @@ namespace api.Controllers
             return note;
         }
 
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteNote(string id){
+            var note = _context.Notes.Find(id);
+            _context.Notes.Remove(note);
+            await _context.SaveChangesAsync();
+            return Ok();
+        }
 
 
     }

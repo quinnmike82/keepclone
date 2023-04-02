@@ -134,4 +134,12 @@ export class BodyComponent {
       error : error => console.log(error.error)
     })
   }
+
+  deleteNote(){
+    this.notes[this.currentNote] = null
+    this.http.delete('https://localhost:5001/api/note/'+this.currentNote.id).subscribe({
+      next : _ => {this.getNote()},
+      error : error => console.log(error.error)
+    })
+  }
 }
